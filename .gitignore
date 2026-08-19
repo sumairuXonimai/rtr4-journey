@@ -1,0 +1,44 @@
+# Prerequisites: Ignore compilation and build outputs
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+out/
+bin/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.db
+*.opendb
+*.vc.db
+*.sln
+*.vcxproj
+*.filters
+
+# CMake temporary files and local user presets
+CMakeCache.txt
+CMakeFiles/
+CMakeSettings.json
+CMakeUserPresets.json
+
+# FetchContent cache (Raylib downloads go here)
+_deps/
+
+# Compiled binary & Library files
+*.obj
+*.o
+*.pdb
+*.ilk
+*.lib
+*.a
+*.dll
+*.so
+*.dylib
+*.exe
+
+# System/OS files
+.DS_Store
+Thumbs.db
