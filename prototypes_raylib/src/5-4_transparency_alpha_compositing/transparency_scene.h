@@ -16,10 +16,10 @@ struct Object
 	Color color;
 };
 
-class TransparencyScene : public Scene
+class TransparencyScene : public Scene3D
 {
 public:
-	TransparencyScene() : Scene() {
+	TransparencyScene() : Scene3D() {
 		ditheringShader = LoadShader(0, "shaders/dither.frag");
 		depthPeelShader = LoadShader(0, "shaders/depth_peel.frag");
 

@@ -11,7 +11,8 @@
 #include <random>
 #include <array>
 
-#include "5-4_transparency_alpha_compositing/5-4.h"
+#include "5-4_transparency_alpha_compositing/transparency_scene.h"
+#include "6_textures/rain_scene.h"
 
 #include "helpers/Globals.h"
 
@@ -24,15 +25,46 @@ int main()
 	rlImGuiSetup(true);
 	SetTargetFPS(144);
 
-	std::unique_ptr<Scene> currentScene{ std::make_unique<TransparencyScene>() };
+	std::unique_ptr<Scene> currentScene{ nullptr };
 
 	while (!WindowShouldClose())
 	{
-		currentScene->Update(GetFrameTime());
+		if (currentScene != nullptr && currentScene->sceneExited)
+			currentScene.reset();
 
-		currentScene->Draw();
+		if (currentScene != nullptr)
+		{
+			SetExitKey(KEY_NULL);
+
+			currentScene->Update(GetFrameTime());
+			currentScene->Draw();
+		}
+		else
+		{
+			SetExitKey(KEY_ESCAPE);
+
+			BeginDrawing();
+
+			ClearBackground(WHITE);
+
+			rlImGuiBegin();
+
+			if (ImGui::Begin("Navigations"))
+			{
+				if (ImGui::Button("5-4 Transparency Scene")) currentScene = std::make_unique<TransparencyScene>();
+				if (ImGui::Button("6 Rain Scene")) currentScene = std::make_unique<RainScene>();
+
+				ImGui::End();
+			}
+
+			rlImGuiEnd();
+
+			EndDrawing();
+		}
 	}
 
 	rlImGuiShutdown();
 	CloseWindow();
+
+	return 0;
 }
